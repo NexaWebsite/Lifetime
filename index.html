@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شمارنده زندگی هوشمند 🧠</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Vazirmatn', sans-serif;
+        }
+        
+        .theme-day {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+        }
+        
+        .theme-night {
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+        }
+        
+        .theme-space {
+            background: linear-gradient(135deg, #000000 0%, #434343 50%, #000000 100%);
+        }
+        
+        .theme-spring {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        }
+        
+        .theme-summer {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        }
+        
+        .theme-autumn {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+        }
+        
+        .theme-winter {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        }
+        
+        .life-bg {
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            transition: all 1s ease;
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .glass-card {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+        
+        .number-display {
+            font-family: 'Courier New', monospace;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .heartbeat-live {
+            animation: heartbeatLive 0.3s ease-in-out;
+        }
+        
+        @keyframes heartbeatLive {
+            0%, 100% { transform: scale(1); filter: hue-rotate(0deg); }
+            50% { transform: scale(1.15); filter: hue-rotate(20deg); }
+        }
+        
+        .breath-live {
+            animation: breatheLive 0.4s ease-in-out;
+        }
+        
+        @keyframes breatheLive {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(5deg); }
+        }
+        
+        .blink-live {
+            animation: blinkLive 0.2s ease-in-out;
+        }
+        
+        @keyframes blinkLive {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(0.8); opacity: 0.7; }
+        }
+        
+        .ai-pulse {
+            animation: aiPulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes aiPulse {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 0 0 20px rgba(79, 172, 254, 0.3);
+            }
+            50% { 
+                transform: scale(1.05);
+                box-shadow: 0 0 40px rgba(79, 172, 254, 0.6);
+            }
+        }
+        
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .floating-element {
+            position: absolute;
+            animation: floatElement 15s linear infinite;
+            opacity: 0.7;
+        }
+        
+        @keyframes floatElement {
+            0% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(0deg);
+            }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.7; }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) rotate(360deg);
+            }
+        }
+        
+        .progress-advanced {
+            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 50%, #4facfe 100%);
+            background-size: 200% 100%;
+            animation: progressFlow 3s ease-in-out infinite;
+        }
+        
+        @keyframes progressFlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .timeline-item {
+            transition: all 0.3s ease;
+        }
+        
+        .timeline-item:hover {
+            transform: scale(1.05);
+            z-index: 10;
+        }
+        
+        .level-badge {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            animation: levelGlow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes levelGlow {
+            0% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+            100% { box-shadow: 0 0 25px rgba(255, 215, 0, 0.8); }
+        }
+        
+        .modal {
+            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.5);
+        }
+        
+        .modal-content {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.9);
+            animation: modalSlideIn 0.3s ease-out;
+        }
+        
+        @keyframes modalSlideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="life-bg theme-day min-h-screen">
+    <!-- Floating Elements -->
+    <div class="floating-elements" id="floatingContainer"></div>
+    
+    <div class="relative z-10 min-h-screen p-4">
+        <!-- Advanced Header -->
+        <div class="text-center py-8">
+            <div class="flex justify-center items-center gap-4 mb-4">
+                <div class="level-badge px-4 py-2 rounded-full text-black font-bold">
+                    سطح <span id="lifeLevel">20</span>
+                </div>
+                <div class="text-2xl">⭐</div>
+                <div class="text-white font-bold">
+                    امتیاز: <span id="lifeScore">7305</span>
+                </div>
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 ai-pulse">
+                🧠 شمارنده زندگی هوشمند
+            </h1>
+            <p class="text-xl text-white opacity-90 mb-4">
+                متولد: ۳ فروردین ۱۳۸۳ (۳ آپریل ۲۰۰۴)
+            </p>
+            
+            <!-- Theme Controls -->
+            <div class="flex flex-wrap justify-center gap-2 mb-6">
+                <button onclick="changeTheme('day')" class="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-full text-sm transition">☀️ روز</button>
+                <button onclick="changeTheme('night')" class="px-4 py-2 bg-gray-800 hover:bg-gray-900 text-white rounded-full text-sm transition">🌙 شب</button>
+                <button onclick="changeTheme('space')" class="px-4 py-2 bg-black hover:bg-gray-900 text-white rounded-full text-sm transition">🚀 فضا</button>
+                <button onclick="changeTheme('spring')" class="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-full text-sm transition">🌸 بهار</button>
+                <button onclick="toggleSound()" class="px-4 py-2 bg-purple-500 hover:bg-purple-600 text-white rounded-full text-sm transition" id="soundBtn">🔊 صدا</button>
+            </div>
+            
+            <div class="text-6xl mb-4">🎂</div>
+        </div>
+
+        <!-- AI Analysis Panel -->
+        <div class="max-w-7xl mx-auto mb-8">
+            <div class="glass-card rounded-3xl p-8 ai-pulse">
+                <h2 class="text-2xl font-bold text-white mb-6 text-center">🤖 تحلیل هوش مصنوعی</h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="text-center">
+                        <div class="text-4xl mb-2">🧬</div>
+                        <div class="text-white font-bold mb-2">تحلیل شخصیت</div>
+                        <div class="text-sm text-white opacity-80" id="personalityAnalysis">
+                            بر اساس تاریخ تولد: خلاق، پرانرژی، رهبر طبیعی
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl mb-2">🔮</div>
+                        <div class="text-white font-bold mb-2">پیش‌بینی آینده</div>
+                        <div class="text-sm text-white opacity-80" id="futurePrediction">
+                            احتمال موفقیت در ۱۰ سال آینده: ۸۷٪
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl mb-2">💡</div>
+                        <div class="text-white font-bold mb-2">توصیه امروز</div>
+                        <div class="text-sm text-white opacity-80" id="dailyAdvice">
+                            امروز روز مناسبی برای شروع پروژه جدید است
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Advanced Counters -->
+        <div class="max-w-7xl mx-auto">
+            <!-- Primary Time Counters -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <div class="glass-card rounded-2xl p-6 text-center">
+                    <div class="text-4xl mb-2">📅</div>
+                    <div class="number-display text-3xl font-bold text-white mb-2" id="years">0</div>
+                    <div class="text-white opacity-80">سال</div>
+                    <div class="text-xs text-white opacity-60 mt-1" id="yearsDetail">+دقیق</div>
+                </div>
+                <div class="glass-card rounded-2xl p-6 text-center">
+                    <div class="text-4xl mb-2">📆</div>
+                    <div class="number-display text-3xl font-bold text-white mb-2" id="months">0</div>
+                    <div class="text-white opacity-80">ماه</div>
+                    <div class="text-xs text-white opacity-60 mt-1" id="monthsDetail">+دقیق</div>
+                </div>
+                <div class="glass-card rounded-2xl p-6 text-center">
+                    <div class="text-4xl mb-2">🗓️</div>
+                    <div class="number-display text-3xl font-bold text-white mb-2" id="days">0</div>
+                    <div class="text-white opacity-80">روز</div>
+                    <div class="text-xs text-white opacity-60 mt-1" id="daysDetail">+دقیق</div>
+                </div>
+                <div class="glass-card rounded-2xl p-6 text-center">
+                    <div class="text-4xl mb-2">⏰</div>
+                    <div class="number-display text-3xl font-bold text-white mb-2" id="hours">0</div>
+                    <div class="text-white opacity-80">ساعت</div>
+                    <div class="text-xs text-white opacity-60 mt-1" id="hoursDetail">+دقیق</div>
+                </div>
+            </div>
+
+            <!-- Live Biological Counters -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <div class="glass-card rounded-2xl p-6 text-center" id="heartCard">
+                    <div class="text-3xl mb-2">💓</div>
+                    <div class="number-display text-2xl font-bold text-white mb-2" id="heartbeats">0</div>
+                    <div class="text-white opacity-80">ضربان قلب</div>
+                    <div class="text-xs text-white opacity-60 mt-1">زنده: <span id="currentBPM">70</span> BPM</div>
+                </div>
+                <div class="glass-card rounded-2xl p-6 text-center" id="breathCard">
+                    <div class="text-3xl mb-2">🌬️</div>
+                    <div class="number-display text-2xl font-bold text-white mb-2" id="breaths">0</div>
+                    <div class="text-white opacity-80">نفس کشیده</div>
+                    <div class="text-xs text-white opacity-60 mt-1">زنده: <span id="currentBreath">15</span>/دقیقه</div>
+                </div>
+                <div class="glass-card rounded-2xl p-6 text-center" id="blinkCard">
+                    <div class="text-3xl mb-2">👁️</div>
+                    <div class="number-display text-2xl font-bold text-white mb-2" id="blinks">0</div>
+                    <div class="text-white opacity-80">پلک زده</div>
+                    <div class="text-xs text-white opacity-60 mt-1">زنده: <span id="currentBlink">17</span>/دقیقه</div>
+                </div>
+                <div class="glass-card rounded-2xl p-6 text-center">
+                    <div class="text-3xl mb-2">🧠</div>
+                    <div class="number-display text-2xl font-bold text-white mb-2" id="thoughts">0</div>
+                    <div class="text-white opacity-80">فکر کرده</div>
+                    <div class="text-xs text-white opacity-60 mt-1">زنده: 60000/روز</div>
+                </div>
+            </div>
+
+            <!-- Scientific Counters -->
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+                <div class="glass-card rounded-2xl p-6 text-center">
+                    <div class="text-3xl mb-2">🧬</div>
+                    <div class="number-display text-xl font-bold text-white mb-2" id="cellRegeneration">0</div>
+                    <div class="text-white opacity-80">سلول بازسازی شده</div>
+                </div>
+                <div class="glass-card rounded-2xl p-6 text-center">
+                    <div class="text-3xl mb-2">⚡</div>
+                    <div class="number-display text-xl font-bold text-white mb-2" id="energyConsumed">0</div>
+                    <div class="text-white opacity-80">کالری مصرف شده</div>
+                </div>
+                <div class="glass-card rounded-2xl p-6 text-center">
+                    <div class="text-3xl mb-2">💧</div>
+                    <div class="number-display text-xl font-bold text-white mb-2" id="waterProcessed">0</div>
+                    <div class="text-white opacity-80">لیتر آب پردازش شده</div>
+                </div>
+                <div class="glass-card rounded-2xl p-6 text-center">
+                    <div class="text-3xl mb-2">🌍</div>
+                    <div class="number-display text-xl font-bold text-white mb-2" id="distanceTraveled">0</div>
+                    <div class="text-white opacity-80">کیلومتر سفر کرده</div>
+                </div>
+                <div class="glass-card rounded-2xl p-6 text-center">
+                    <div class="text-3xl mb-2">📚</div>
+                    <div class="number-display text-xl font-bold text-white mb-2" id="wordsSpoken">0</div>
+                    <div class="text-white opacity-80">کلمه گفته</div>
+                </div>
+                <div class="glass-card rounded-2xl p-6 text-center">
+                    <div class="text-3xl mb-2">😊</div>
+                    <div class="number-display text-xl font-bold text-white mb-2" id="smilesCount">0</div>
+                    <div class="text-white opacity-80">بار لبخند زده</div>
+                </div>
+            </div>
+
+            <!-- Advanced Progress Tracking -->
+            <div class="glass-card rounded-3xl p-8 mb-8">
+                <h2 class="text-2xl font-bold text-white mb-6 text-center">📊 تحلیل پیشرفته زندگی</h2>
+                <div class="space-y-6">
+                    <div>
+                        <div class="flex justify-between text-white mb-2">
+                            <span>پیشرفت زندگی (تا ۸۰ سالگی)</span>
+                            <span id="lifePercent">0%</span>
+                        </div>
+                        <div class="bg-white bg-opacity-20 rounded-full h-6">
+                            <div class="progress-advanced h-6 rounded-full transition-all duration-1000" id="lifeProgress"></div>
+                        </div>
+                        <div class="text-xs text-white opacity-70 mt-1" id="lifeRemaining">باقی‌مانده: 0 سال</div>
+                    </div>
+                    
+                    <div>
+                        <div class="flex justify-between text-white mb-2">
+                            <span>پیشرفت قرن (۲۱ام)</span>
+                            <span id="centuryPercent">0%</span>
+                        </div>
+                        <div class="bg-white bg-opacity-20 rounded-full h-4">
+                            <div class="progress-advanced h-4 rounded-full transition-all duration-1000" id="centuryProgress"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="flex justify-between text-white mb-2">
+                            <span>پیشرفت هزاره (۳ام)</span>
+                            <span id="millenniumPercent">0%</span>
+                        </div>
+                        <div class="bg-white bg-opacity-20 rounded-full h-4">
+                            <div class="progress-advanced h-4 rounded-full transition-all duration-1000" id="millenniumProgress"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Life Timeline -->
+            <div class="glass-card rounded-3xl p-8 mb-8">
+                <h2 class="text-2xl font-bold text-white mb-6 text-center">⏳ تایم‌لاین زندگی</h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Past Milestones -->
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-4">🏆 دستاوردهای گذشته</h3>
+                        <div class="space-y-3">
+                            <div class="timeline-item flex items-center p-3 bg-green-500 bg-opacity-20 rounded-lg">
+                                <span class="text-green-400 ml-3">✓</span>
+                                <div>
+                                    <div class="text-white font-medium">تولد شدن</div>
+                                    <div class="text-xs text-white opacity-70">۳ آپریل ۲۰۰۴</div>
+                                </div>
+                            </div>
+                            <div class="timeline-item flex items-center p-3 bg-green-500 bg-opacity-20 rounded-lg">
+                                <span class="text-green-400 ml-3">✓</span>
+                                <div>
+                                    <div class="text-white font-medium">اولین قدم</div>
+                                    <div class="text-xs text-white opacity-70">حدود ۱ سالگی</div>
+                                </div>
+                            </div>
+                            <div class="timeline-item flex items-center p-3 bg-green-500 bg-opacity-20 rounded-lg">
+                                <span class="text-green-400 ml-3">✓</span>
+                                <div>
+                                    <div class="text-white font-medium">شروع مدرسه</div>
+                                    <div class="text-xs text-white opacity-70">۶ سالگی</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Future Milestones -->
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-4">🔮 رویدادهای آینده</h3>
+                        <div class="space-y-3">
+                            <div class="timeline-item flex items-center p-3 bg-blue-500 bg-opacity-20 rounded-lg">
+                                <span class="text-blue-400 ml-3" id="milestone25Icon">⏳</span>
+                                <div>
+                                    <div class="text-white font-medium">۲۵ سالگی</div>
+                                    <div class="text-xs text-white opacity-70" id="milestone25Date">۳ آپریل ۲۰۲۹</div>
+                                </div>
+                            </div>
+                            <div class="timeline-item flex items-center p-3 bg-purple-500 bg-opacity-20 rounded-lg">
+                                <span class="text-purple-400 ml-3">⏳</span>
+                                <div>
+                                    <div class="text-white font-medium">۳۰ سالگی</div>
+                                    <div class="text-xs text-white opacity-70">۳ آپریل ۲۰۳۴</div>
+                                </div>
+                            </div>
+                            <div class="timeline-item flex items-center p-3 bg-yellow-500 bg-opacity-20 rounded-lg">
+                                <span class="text-yellow-400 ml-3">⏳</span>
+                                <div>
+                                    <div class="text-white font-medium">نیمه زندگی (۴۰)</div>
+                                    <div class="text-xs text-white opacity-70">۳ آپریل ۲۰۴۴</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cosmic Perspective -->
+            <div class="glass-card rounded-3xl p-8 mb-8">
+                <h2 class="text-2xl font-bold text-white mb-6 text-center">🌌 دیدگاه کیهانی</h2>
+                <div class="grid md:grid-cols-3 gap-6 text-white">
+                    <div class="text-center">
+                        <div class="text-4xl mb-2">🌍</div>
+                        <div class="font-bold mb-2">سفر با زمین</div>
+                        <div class="text-sm opacity-80">
+                            <div><span id="earthDistance" class="font-bold">0</span> کیلومتر</div>
+                            <div class="text-xs opacity-70">در مدار خورشید</div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl mb-2">☀️</div>
+                        <div class="font-bold mb-2">سفر با خورشید</div>
+                        <div class="text-sm opacity-80">
+                            <div><span id="solarDistance" class="font-bold">0</span> کیلومتر</div>
+                            <div class="text-xs opacity-70">در کهکشان</div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl mb-2">🌌</div>
+                        <div class="font-bold mb-2">سفر با کهکشان</div>
+                        <div class="text-sm opacity-80">
+                            <div><span id="galaxyDistance" class="font-bold">0</span> کیلومتر</div>
+                            <div class="text-xs opacity-70">در کیهان</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Features -->
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div class="glass-card rounded-2xl p-6">
+                    <h3 class="text-xl font-bold text-white mb-4 text-center">🎮 ویژگی‌های تعاملی</h3>
+                    <div class="space-y-3">
+                        <button onclick="showDetailedStats()" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full transition">
+                            📊 آمار تفصیلی
+                        </button>
+                        <button onclick="predictFuture()" class="w-full bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-full transition">
+                            🔮 پیش‌بینی آینده
+                        </button>
+                        <button onclick="compareWithOthers()" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full transition">
+                            👥 مقایسه با دیگران
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="glass-card rounded-2xl p-6">
+                    <h3 class="text-xl font-bold text-white mb-4 text-center">🏅 دستاوردها</h3>
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="text-white">🎂 تولد</span>
+                            <span class="text-green-400">✓</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-white">🚶 اولین قدم</span>
+                            <span class="text-green-400">✓</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-white">📚 شروع مدرسه</span>
+                            <span class="text-green-400">✓</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-white" id="achievement18">🔞 بلوغ قانونی</span>
+                            <span class="text-yellow-400" id="achievement18Status">⏳</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for detailed stats -->
+    <div id="statsModal" class="modal fixed inset-0 z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="modal-content rounded-3xl p-8 max-w-2xl w-full max-h-96 overflow-y-auto">
+                <h2 class="text-2xl font-bold mb-6 text-center">📊 آمار تفصیلی زندگی</h2>
+                <div id="detailedStatsContent" class="space-y-4">
+                    <!-- Content will be populated by JavaScript -->
+                </div>
+                <button onclick="closeModal()" class="w-full mt-6 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full">
+                    بستن
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Birth date: April 3, 2004
+        const birthDate = new Date(2004, 3, 3);
+        let soundEnabled = true;
+        let currentTheme = 'day';
+        
+        // Live counters
+        let liveHeartbeats = 0;
+        let liveBreaths = 0;
+        let liveBlinks = 0;
+        let liveThoughts = 0;
+        
+        function createFloatingElements() {
+            const themes = {
+                day: ['☀️', '☁️', '🌈', '🦋'],
+                night: ['⭐', '🌙', '✨', '🌟'],
+                space: ['🚀', '🛸', '👽', '🌌'],
+                spring: ['🌸', '🌺', '🦋', '🌿'],
+                summer: ['☀️', '🌻', '🏖️', '🍉'],
+                autumn: ['🍂', '🍁', '🎃', '🌰'],
+                winter: ['❄️', '⛄', '🎿', '🔥']
+            };
+            
+            const element = document.createElement('div');
+            element.className = 'floating-element text-2xl';
+            element.innerHTML = themes[currentTheme][Math.floor(Math.random() * themes[currentTheme].length)];
+            element.style.left = Math.random() * 100 + '%';
+            element.style.animationDelay = Math.random() * 2 + 's';
+            element.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            document.getElementById('floatingContainer').appendChild(element);
+            
+            setTimeout(() => {
+                element.remove();
+            }, 15000);
+        }
+        
+        setInterval(createFloatingElements, 1000);
+        
+        function changeTheme(theme) {
+            currentTheme = theme;
+            const body = document.body;
+            body.className = body.className.replace(/theme-\w+/, `theme-${theme}`);
+        }
+        
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            document.getElementById('soundBtn').textContent = soundEnabled ? '🔊 صدا' : '🔇 بی‌صدا';
+        }
+        
+        function playSound(frequency = 440, duration = 100) {
+            if (!soundEnabled) return;
+            
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.value = frequency;
+                oscillator.type = 'sine';
+                
+                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration / 1000);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + duration / 1000);
+            } catch (e) {
+                // Fallback for browsers that don't support Web Audio API
+            }
+        }
+        
+        function updateCounters() {
+            const now = new Date();
+            const diff = now - birthDate;
+            
+            // Basic calculations
+            const totalSeconds = Math.floor(diff / 1000);
+            const totalMinutes = Math.floor(totalSeconds / 60);
+            const totalHours = Math.floor(totalMinutes / 60);
+            const totalDays = Math.floor(totalHours / 24);
+            const totalMonths = Math.floor(totalDays / 30.44);
+            const years = Math.floor(totalDays / 365.25);
+            
+            // Precise calculations
+            const preciseYears = diff / (365.25 * 24 * 60 * 60 * 1000);
+            const preciseMonths = diff / (30.44 * 24 * 60 * 60 * 1000);
+            
+            // Update basic counters
+            document.getElementById('years').textContent = years.toLocaleString();
+            document.getElementById('months').textContent = totalMonths.toLocaleString();
+            document.getElementById('days').textContent = totalDays.toLocaleString();
+            document.getElementById('hours').textContent = totalHours.toLocaleString();
+            
+            // Update detail displays
+            document.getElementById('yearsDetail').textContent = preciseYears.toFixed(6);
+            document.getElementById('monthsDetail').textContent = preciseMonths.toFixed(4);
+            document.getElementById('daysDetail').textContent = (totalDays + (totalHours % 24) / 24).toFixed(4);
+            document.getElementById('hoursDetail').textContent = (totalHours + (totalMinutes % 60) / 60).toFixed(4);
+            
+            // Biological calculations
+            const baseHeartbeats = Math.floor(totalMinutes * 70);
+            const baseBreaths = Math.floor(totalMinutes * 15);
+            const baseBlinks = Math.floor(totalMinutes * 17);
+            const baseThoughts = Math.floor(totalDays * 60000);
+            
+            document.getElementById('heartbeats').textContent = (baseHeartbeats + liveHeartbeats).toLocaleString();
+            document.getElementById('breaths').textContent = (baseBreaths + liveBreaths).toLocaleString();
+            document.getElementById('blinks').textContent = (baseBlinks + liveBlinks).toLocaleString();
+            document.getElementById('thoughts').textContent = (baseThoughts + liveThoughts).toLocaleString();
+            
+            // Scientific calculations
+            document.getElementById('cellRegeneration').textContent = Math.floor(totalDays * 25000000000).toLocaleString();
+            document.getElementById('energyConsumed').textContent = Math.floor(totalDays * 2000).toLocaleString();
+            document.getElementById('waterProcessed').textContent = Math.floor(totalDays * 2.5).toLocaleString();
+            document.getElementById('distanceTraveled').textContent = Math.floor(totalDays * 12).toLocaleString();
+            document.getElementById('wordsSpoken').textContent = Math.floor(totalDays * 16000).toLocaleString();
+            document.getElementById('smilesCount').textContent = Math.floor(totalDays * 20).toLocaleString();
+            
+            // Progress calculations
+            const lifePercent = Math.min((years / 80) * 100, 100);
+            document.getElementById('lifePercent').textContent = lifePercent.toFixed(2) + '%';
+            document.getElementById('lifeProgress').style.width = lifePercent + '%';
+            document.getElementById('lifeRemaining').textContent = `باقی‌مانده: ${(80 - years).toFixed(1)} سال`;
+            
+            // Century progress (2001-2100)
+            const centuryStart = new Date(2001, 0, 1);
+            const centuryEnd = new Date(2101, 0, 1);
+            const centuryPercent = ((now - centuryStart) / (centuryEnd - centuryStart)) * 100;
+            document.getElementById('centuryPercent').textContent = centuryPercent.toFixed(2) + '%';
+            document.getElementById('centuryProgress').style.width = centuryPercent + '%';
+            
+            // Millennium progress (2001-3000)
+            const millenniumStart = new Date(2001, 0, 1);
+            const millenniumEnd = new Date(3001, 0, 1);
+            const millenniumPercent = ((now - millenniumStart) / (millenniumEnd - millenniumStart)) * 100;
+            document.getElementById('millenniumPercent').textContent = millenniumPercent.toFixed(4) + '%';
+            document.getElementById('millenniumProgress').style.width = millenniumPercent + '%';
+            
+            // Cosmic distances
+            document.getElementById('earthDistance').textContent = Math.floor(totalDays * 2.6 * 1000000).toLocaleString();
+            document.getElementById('solarDistance').textContent = Math.floor(totalDays * 19.4 * 1000000).toLocaleString();
+            document.getElementById('galaxyDistance').textContent = Math.floor(totalDays * 514 * 1000000).toLocaleString();
+            
+            // Life level and score
+            const lifeLevel = Math.floor(years) + 1;
+            const lifeScore = Math.floor(totalDays * 10 + totalHours);
+            document.getElementById('lifeLevel').textContent = lifeLevel;
+            document.getElementById('lifeScore').textContent = lifeScore.toLocaleString();
+            
+            // Achievements
+            if (years >= 18) {
+                document.getElementById('achievement18Status').textContent = '✓';
+                document.getElementById('achievement18Status').className = 'text-green-400';
+            }
+            
+            // Update AI predictions
+            updateAIPredictions(years, totalDays);
+        }
+        
+        function updateAIPredictions(years, days) {
+            const personalities = [
+                "خلاق، پرانرژی، رهبر طبیعی",
+                "تحلیلگر، دقیق، قابل اعتماد",
+                "اجتماعی، مهربان، الهام‌بخش",
+                "مستقل، نوآور، آینده‌نگر"
+            ];
+            
+            const predictions = [
+                `احتمال موفقیت در ۱۰ سال آینده: ${85 + Math.floor(Math.random() * 10)}٪`,
+                `پیش‌بینی سلامتی: عالی تا ${80 + Math.floor(Math.random() * 15)} سالگی`,
+                `احتمال تغییر شغل: ${30 + Math.floor(Math.random() * 40)}٪`,
+                `شاخص خوشبختی: ${75 + Math.floor(Math.random() * 20)}٪`
+            ];
+            
+            const advice = [
+                "امروز روز مناسبی برای شروع پروژه جدید است",
+                "تمرکز روی روابط اجتماعی امروز مفید خواهد بود",
+                "وقت مناسبی برای یادگیری مهارت جدید است",
+                "امروز انرژی خلاقیت شما در اوج است"
+            ];
+            
+            document.getElementById('personalityAnalysis').textContent = personalities[Math.floor(days / 100) % personalities.length];
+            document.getElementById('futurePrediction').textContent = predictions[Math.floor(days / 50) % predictions.length];
+            document.getElementById('dailyAdvice').textContent = advice[Math.floor(days / 30) % advice.length];
+        }
+        
+        // Live biological functions
+        function updateHeartbeat() {
+            liveHeartbeats++;
+            const heartElement = document.getElementById('heartbeats');
+            const heartCard = document.getElementById('heartCard');
+            
+            heartElement.classList.add('heartbeat-live');
+            heartCard.style.background = 'rgba(255, 107, 107, 0.3)';
+            heartCard.style.transform = 'scale(1.02)';
+            
+            playSound(220, 50);
+            
+            setTimeout(() => {
+                heartElement.classList.remove('heartbeat-live');
+                heartCard.style.background = '';
+                heartCard.style.transform = '';
+            }, 300);
+        }
+        
+        function updateBreath() {
+            liveBreaths++;
+            const breathElement = document.getElementById('breaths');
+            const breathCard = document.getElementById('breathCard');
+            
+            breathElement.classList.add('breath-live');
+            breathCard.style.background = 'rgba(79, 172, 254, 0.3)';
+            breathCard.style.transform = 'scale(1.02)';
+            
+            playSound(330, 200);
+            
+            setTimeout(() => {
+                breathElement.classList.remove('breath-live');
+                breathCard.style.background = '';
+                breathCard.style.transform = '';
+            }, 400);
+        }
+        
+        function updateBlink() {
+            liveBlinks++;
+            const blinkElement = document.getElementById('blinks');
+            const blinkCard = document.getElementById('blinkCard');
+            
+            blinkElement.classList.add('blink-live');
+            blinkCard.style.background = 'rgba(255, 215, 0, 0.3)';
+            blinkCard.style.transform = 'scale(1.02)';
+            
+            playSound(440, 30);
+            
+            setTimeout(() => {
+                blinkElement.classList.remove('blink-live');
+                blinkCard.style.background = '';
+                blinkCard.style.transform = '';
+            }, 200);
+        }
+        
+        function updateThought() {
+            liveThoughts += Math.floor(Math.random() * 5) + 1;
+        }
+        
+        // Interactive functions
+        function showDetailedStats() {
+            const now = new Date();
+            const diff = now - birthDate;
+            const totalDays = Math.floor(diff / (24 * 60 * 60 * 1000));
+            
+            const content = `
+                <div class="grid grid-cols-2 gap-4 text-sm">
+                    <div><strong>دقیق‌ترین سن:</strong> ${(diff / (365.25 * 24 * 60 * 60 * 1000)).toFixed(8)} سال</div>
+                    <div><strong>میلی‌ثانیه زندگی:</strong> ${diff.toLocaleString()}</div>
+                    <div><strong>درصد قرن:</strong> ${(((now - new Date(2001, 0, 1)) / (new Date(2101, 0, 1) - new Date(2001, 0, 1))) * 100).toFixed(6)}%</div>
+                    <div><strong>تعداد نفس‌های امروز:</strong> ${Math.floor(((now - new Date(now.getFullYear(), now.getMonth(), now.getDate())) / (1000 * 60)) * 15)}</div>
+                    <div><strong>کالری امروز:</strong> ${Math.floor(Math.random() * 500) + 1500}</div>
+                    <div><strong>قدم‌های امروز:</strong> ${Math.floor(Math.random() * 5000) + 3000}</div>
+                </div>
+            `;
+            
+            document.getElementById('detailedStatsContent').innerHTML = content;
+            document.getElementById('statsModal').classList.remove('hidden');
+        }
+        
+        function predictFuture() {
+            alert('🔮 بر اساس تحلیل داده‌ها:\n\n• احتمال ۸۷٪ موفقیت در ۵ سال آینده\n• پیش‌بینی عمر: ۸۵ سال\n• احتمال ازدواج تا ۳۰ سالگی: ۷۲٪\n• شاخص خوشبختی آینده: ۹۱٪');
+        }
+        
+        function compareWithOthers() {
+            alert('👥 مقایسه با همسالان:\n\n• شما در ۲۳٪ بالای میانگین سنی قرار دارید\n• تجربه زندگی: بالاتر از ۶۸٪ همسالان\n• سطح انرژی: ۸۵٪\n• پتانسیل رشد: ۹۲٪');
+        }
+        
+        function closeModal() {
+            document.getElementById('statsModal').classList.add('hidden');
+        }
+        
+        // Set up intervals
+        setInterval(updateHeartbeat, 857); // ~70 bpm
+        setInterval(updateBreath, 4000); // 15 breaths per minute
+        setInterval(updateBlink, 3500); // ~17 blinks per minute
+        setInterval(updateThought, 1440); // ~60000 thoughts per day
+        setInterval(updateCounters, 100); // Update every 100ms for smooth animation
+        
+        // Initial update
+        updateCounters();
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97973955f07cf9f0',t:'MTc1NjkyMzIzNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
